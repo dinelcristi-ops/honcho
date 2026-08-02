@@ -135,3 +135,20 @@ services:
   #     - GF_SECURITY_ADMIN_USER=admin
   #     - GF_SECURITY_ADMIN_PASSWORD=admin
   #     - GF_AUTH_ANONYMOUS_ENABLED=true
+  #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+  #   volumes:
+  #     - ./docker/grafana-datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+  #   depends_on:
+  #     prometheus:
+  #       condition: service_started
+
+volumes:
+  pgdata:
+  redis-data:
+  # -- Development: uncomment if using source mounts --
+  # venv:
+  # prometheus-data:
+networks:
+  coolify:
+    name: coolify
+    external: true
