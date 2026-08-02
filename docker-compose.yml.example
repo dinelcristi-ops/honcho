@@ -140,3 +140,7 @@ volumes:
   # -- Development: uncomment if using source mounts --
   # venv:
   # prometheus-data:
+networks:
+  default:
+    name: coolify
+    external: true
