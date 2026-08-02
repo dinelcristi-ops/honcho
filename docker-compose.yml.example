@@ -45,6 +45,8 @@ services:
       - path: .env
         required: false
     restart: unless-stopped
+    networks:
+      - coolify
 
   deriver:
     build:
@@ -70,6 +72,8 @@ services:
       - path: .env
         required: false
     restart: unless-stopped
+    networks:
+      - coolify
 
   database:
     image: pgvector/pgvector:pg15
@@ -94,6 +98,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - coolify
 
   redis:
     image: redis:8.2
@@ -107,6 +113,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - coolify
 
   # -- Development: monitoring stack (uncomment to enable) --
   # prometheus:
@@ -127,20 +135,3 @@ services:
   #     - GF_SECURITY_ADMIN_USER=admin
   #     - GF_SECURITY_ADMIN_PASSWORD=admin
   #     - GF_AUTH_ANONYMOUS_ENABLED=true
-  #     - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
-  #   volumes:
-  #     - ./docker/grafana-datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
-  #   depends_on:
-  #     prometheus:
-  #       condition: service_started
-
-volumes:
-  pgdata:
-  redis-data:
-  # -- Development: uncomment if using source mounts --
-  # venv:
-  # prometheus-data:
-networks:
-  default:
-    name: coolify
-    external: true
